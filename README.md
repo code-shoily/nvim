@@ -248,6 +248,30 @@ Full language support for Zig via `lazyvim.plugins.extras.lang.zig`, `zls`, and 
 
 ---
 
+## 🔄 Surround Operations (`mini.surround`)
+
+Manipulate surrounding quotes, brackets, and tags effortlessly:
+
+| Key | Mode | Action | Example |
+| :--- | :--- | :--- | :--- |
+| **`gsa`** | Normal / Visual | **Add surrounding** | `gsa iw "` turns `word` ➔ `"word"` |
+| **`gsd`** | Normal | **Delete surrounding** | `gsd "` turns `"word"` ➔ `word` |
+| **`gsr`** | Normal | **Replace surrounding** | `gsr "` `'` turns `"word"` ➔ `'word'` |
+| **`gsh`** | Normal | **Highlight surrounding** | Highlights surrounding pairs |
+| **`gsf`** / **`gsF`** | Normal | **Find surrounding** | Jump to surrounding right / left |
+
+---
+
+## 🌳 Visual Branching Undo (`undotree`)
+
+Neovim saves persistent undo history on disk. `undotree` lets you navigate non-linear editing branches:
+
+| Key | Action | Description |
+| :--- | :--- | :--- |
+| **`<Leader>uu`** | **Toggle Undotree** | Opens visual branching history timeline with real-time diff preview |
+
+---
+
 ## 🐙 Git Navigation & Conflict Resolution
 
 ### LazyGit & Hunk Navigation
