@@ -89,6 +89,9 @@ For full functionality across languages, install the following language tools:
 | `<C-j>` / `<C-k>` | Normal | Jump between lower / upper window splits |
 | `<Esc>` | Normal | Clear search highlights and dismiss floating popups/notifications |
 | `<Leader>cf` | Normal | **Code Format** (Mix format for Elixir, zprint for Clojure, Gleam format for Gleam, zig fmt for Zig) |
+| `<Leader>tf` / `:A` | Normal | **Toggle Test / Source**: Switch between implementation and its test file |
+| `<Leader>tv` / `:AV` | Normal | **Split Test / Source**: Open test file side-by-side in vertical split |
+| `<C-^>` | Normal | **Vim Alternate**: Flip between last two active buffers |
 | `<Leader>e` | Normal | Toggle file explorer sidebar |
 | `<Leader><Space>` | Normal | Find files (Snacks picker) |
 | `<Leader>/` | Normal | Live grep text in project |

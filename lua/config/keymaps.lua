@@ -149,3 +149,23 @@ vim.keymap.set("v", "<leader>aC", function()
   open_ai_cli_with_context("claude", true, "float")
 end, { desc = "Claude Floating (selected lines)" })
 
+-- =============================================================================
+-- Alternate Test / Source Switching (<leader>tf, <leader>tv, :A, :AV)
+-- =============================================================================
+
+vim.keymap.set("n", "<leader>tf", function()
+  require("config.alternate").switch(false)
+end, { desc = "Toggle test / source file" })
+
+vim.keymap.set("n", "<leader>tv", function()
+  require("config.alternate").switch(true)
+end, { desc = "Split test / source file vertically" })
+
+vim.api.nvim_create_user_command("A", function()
+  require("config.alternate").switch(false)
+end, { desc = "Edit alternate test/source file" })
+
+vim.api.nvim_create_user_command("AV", function()
+  require("config.alternate").switch(true)
+end, { desc = "Open alternate test/source file in vertical split" })
+
