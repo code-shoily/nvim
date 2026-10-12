@@ -141,11 +141,14 @@ Elixir is a cornerstone language in my daily workflow. This setup replaces tradi
 - **`[d` / `]d`**: Jump to previous / next compiler diagnostic or warning
 - **`<Leader>cr`**: Rename symbol (with live incremental rename)
 
-### 3. Formatting & Testing
-- **`<Leader>cf`**: Formats current buffer with `mix format` via Conform.
-- **`<Leader>tt`**: Run test suite via `neotest-elixir`.
-- **`<Leader>tr`**: Run nearest test under cursor.
-- **`<Leader>ts`**: View test summary and debug output.
+### 3. Execution & Testing
+- **`\r`**: Run project (`mix run` or `elixir <file.exs>`)
+- **`\t`**: Run tests (`mix test` or `mix test <test_file>`)
+- **`\s`**: Launch interactive `iex -S mix` session
+- **`<Leader>cf`**: Formats current buffer with `mix format` via Conform
+- **`<Leader>tt`**: Run test suite via `neotest-elixir`
+- **`<Leader>tr`**: Run nearest test under cursor
+- **`<Leader>ts`**: View test summary and debug output
 
 ---
 
@@ -202,6 +205,13 @@ Full language support for Gleam and the BEAM runtime:
 - **`]d`** / **`[d`**: Jump to next / previous compiler error
 - **`<Leader>ca`**: Code actions (auto-import modules, generate missing case match patterns)
 
+### Execution Shortcuts (`\`)
+- **`\r`**: Run project root (`gleam run`)
+- **`\m`**: **Run current module** (`gleam run -m <module>` — auto-detects `src/...` path)
+- **`\t`**: Run tests (`gleam test`)
+- **`\c`**: Fast compiler check (`gleam check`)
+- **`\s`**: Launch interactive Erlang/Gleam shell (`gleam shell`)
+
 ---
 
 ## ⚡ Zig Development
@@ -214,7 +224,11 @@ Full language support for Zig via `lazyvim.plugins.extras.lang.zig`, `zls`, and 
 - **`]d`** / **`[d`**: Jump to next / previous compiler error or diagnostic
 - **`<Leader>tt`**: Run `zig test` suite via `neotest-zig`
 - **`<Leader>tr`**: Run nearest test under cursor
-- **`<Leader>ts`**: View test summary & status
+
+### Execution Shortcuts (`\`)
+- **`\r`**: Run (`zig build run` if `build.zig` exists, or `zig run <file.zig>`)
+- **`\t`**: Run tests (`zig build test` or `zig test <file.zig>`)
+- **`\b`**: Build project (`zig build`)
 
 ---
 
