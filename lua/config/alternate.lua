@@ -60,6 +60,22 @@ function M.find_alternate(filepath)
     if test ~= path then return test end
   end
 
+  -- 5. Rust: src/...rs <-> tests/..._test.rs
+  if path:match("^tests/(.*)_test%.rs$") then
+    local src = "src/" .. path:match("^tests/(.*)_test%.rs$") .. ".rs"
+    if src ~= path then return src end
+  elseif path:match("^tests/(.*)%.rs$") then
+    local src = "src/" .. path:match("^tests/(.*)%.rs$") .. ".rs"
+    if src ~= path then return src end
+  elseif path:match("^src/(.*)%.rs$") then
+    local name = path:match("^src/(.*)%.rs$")
+    local test1 = "tests/" .. name .. "_test.rs"
+    if vim.fn.filereadable(test1) == 1 then return test1 end
+    local test2 = "tests/" .. name .. ".rs"
+    if vim.fn.filereadable(test2) == 1 then return test2 end
+    return test1
+  end
+
   return nil
 end
 
