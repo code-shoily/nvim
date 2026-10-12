@@ -76,6 +76,15 @@ function M.find_alternate(filepath)
     return test1
   end
 
+  -- 6. Go: foo.go <-> foo_test.go
+  if path:match("_test%.go$") then
+    local src = path:gsub("_test%.go$", ".go")
+    if src ~= path then return src end
+  elseif path:match("%.go$") then
+    local test = path:gsub("%.go$", "_test.go")
+    if test ~= path then return test end
+  end
+
   return nil
 end
 
