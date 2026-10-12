@@ -1,6 +1,6 @@
 # ⚡ My Neovim Setup
 
-A bespoke, keyboard-centric Neovim configuration built on the exceptional foundation of [LazyVim](https://lazyvim.org), specifically tuned for my daily workflow across **Elixir**, **Clojure (REPL-Driven Development)**, and **Gleam**, alongside paired AI programming with **Antigravity (AGY)** and **Claude Code**.
+A bespoke, keyboard-centric Neovim configuration built on the exceptional foundation of [LazyVim](https://lazyvim.org), specifically tuned for my daily workflow across **Elixir**, **Clojure (REPL-Driven Development)**, **Gleam**, and **Zig**, alongside paired AI programming with **Antigravity (AGY)** and **Claude Code**.
 
 This configuration represents a complete modernization and migration from my long-standing Vim setup, [code-shoily-vimrc](https://github.com/code-shoily/code-shoily-vimrc). It preserves the hard-earned muscle memory and ergonomic principles from that setup (instant home-row escape with `jj`, shift-free command mode with `;`, fast window split navigation) while embracing the speed of Lua, Treesitter AST awareness, native LSP integrations, and native AI terminal pairing.
 
@@ -65,6 +65,11 @@ For full functionality across languages, install the following language tools:
 - **Gleam** compiler (`gleam`) — includes built-in `gleam lsp` and formatter.
 - **Erlang/OTP** (>= 26).
 
+### ⚡ Zig
+- **Zig** compiler (`zig`): Installed via `mise` (or system package manager).
+- **zls** (Zig Language Server): Installed on PATH (e.g. via `mise install zls`).
+- **zig fmt**: Built into the Zig toolchain, auto-invoked via `<Leader>cf`.
+
 ### 🤖 AI CLI & Terminal Tools
 - **agy** (Antigravity CLI): Placed on PATH (`~/.local/bin/agy`). Uses Google subscription.
 - **claude** (Claude Code CLI): Placed on PATH (`~/.local/bin/claude`). Uses Anthropic subscription.
@@ -83,7 +88,7 @@ For full functionality across languages, install the following language tools:
 | `<C-h>` / `<C-l>` | Normal | Jump between left / right window splits |
 | `<C-j>` / `<C-k>` | Normal | Jump between lower / upper window splits |
 | `<Esc>` | Normal | Clear search highlights and dismiss floating popups/notifications |
-| `<Leader>cf` | Normal | **Code Format** (Mix format for Elixir, zprint for Clojure, Gleam format for Gleam) |
+| `<Leader>cf` | Normal | **Code Format** (Mix format for Elixir, zprint for Clojure, Gleam format for Gleam, zig fmt for Zig) |
 | `<Leader>e` | Normal | Toggle file explorer sidebar |
 | `<Leader><Space>` | Normal | Find files (Snacks picker) |
 | `<Leader>/` | Normal | Live grep text in project |
@@ -196,6 +201,20 @@ Full language support for Gleam and the BEAM runtime:
 - **`<Leader>cf`**: Format with `gleam format`
 - **`]d`** / **`[d`**: Jump to next / previous compiler error
 - **`<Leader>ca`**: Code actions (auto-import modules, generate missing case match patterns)
+
+---
+
+## ⚡ Zig Development
+
+Full language support for Zig via `lazyvim.plugins.extras.lang.zig`, `zls`, and `neotest-zig`:
+- **`gd`**: Go to definition
+- **`gr`**: Find references
+- **`K`**: Hover documentation & type signatures
+- **`<Leader>cf`**: Auto-format buffer with `zig fmt`
+- **`]d`** / **`[d`**: Jump to next / previous compiler error or diagnostic
+- **`<Leader>tt`**: Run `zig test` suite via `neotest-zig`
+- **`<Leader>tr`**: Run nearest test under cursor
+- **`<Leader>ts`**: View test summary & status
 
 ---
 
