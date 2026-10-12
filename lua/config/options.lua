@@ -12,3 +12,6 @@ vim.opt.guifont = "CaskaydiaCove Nerd Font:h13"
 
 -- Fast keycode & mapping timeout
 vim.opt.timeoutlen = 300
+
+-- Ensure auto pairs is always enabled by default
+vim.g.minipairs_disable = false
