@@ -29,8 +29,8 @@ vim.keymap.set("n", "<Esc>", function()
   end
 end, { desc = "Clear highlights and dismiss popups" })
 
--- Launch Antigravity (AGY) with persistent session and conversation continuation
-local function open_agy_with_context(is_visual, layout)
+-- Launch AI CLI (AGY or Claude) with persistent session and conversation continuation
+local function open_ai_cli_with_context(cli_name, is_visual, layout)
   local file = vim.fn.expand("%:.") -- Relative path to project root
   local line_info
   local win_config = (layout == "float") and {
@@ -43,14 +43,16 @@ local function open_agy_with_context(is_visual, layout)
     width = 0.42,
   }
 
+  local base_cmd = (cli_name == "claude") and "claude -c" or "agy -c"
+
   if file == "" then
     if pcall(require, "snacks") and Snacks and Snacks.terminal then
-      local term = Snacks.terminal.get("agy -c", { win = win_config, create = true })
+      local term = Snacks.terminal.get(base_cmd, { win = win_config, create = true })
       if term then
         term:show()
       end
     else
-      vim.cmd("botright vsplit | vertical resize 60 | terminal agy -c")
+      vim.cmd("botright vsplit | vertical resize 60 | terminal " .. base_cmd)
     end
     return
   end
@@ -67,7 +69,9 @@ local function open_agy_with_context(is_visual, layout)
     line_info = string.format("line %d", cur_line)
   end
 
-  local mode_label = (layout == "float") and "AGY [Float]" or "AGY [Sidebar]"
+  local display_name = (cli_name == "claude") and "Claude" or "AGY"
+  local mode_label = (layout == "float") and string.format("%s [Float]", display_name)
+    or string.format("%s [Sidebar]", display_name)
   local prompt_label = string.format("%s [%s:%s]: ", mode_label, file, line_info)
 
   vim.ui.input({ prompt = prompt_label }, function(input)
@@ -77,7 +81,7 @@ local function open_agy_with_context(is_visual, layout)
     end
 
     if pcall(require, "snacks") and Snacks and Snacks.terminal then
-      local term, created = Snacks.terminal.get("agy -c", {
+      local term, created = Snacks.terminal.get(base_cmd, {
         win = win_config,
         create = true,
       })
@@ -92,30 +96,56 @@ local function open_agy_with_context(is_visual, layout)
         end
       end
     else
-      local cmd = "agy -c"
+      local cmd = base_cmd
       if full_prompt ~= "" then
-        cmd = string.format("agy -c -i %s", vim.fn.shellescape(full_prompt))
+        if cli_name == "claude" then
+          cmd = string.format("claude -c %s", vim.fn.shellescape(full_prompt))
+        else
+          cmd = string.format("agy -c -i %s", vim.fn.shellescape(full_prompt))
+        end
       end
       vim.cmd("botright vsplit | vertical resize 60 | terminal " .. cmd)
     end
   end)
 end
 
--- <leader>aa -> Right Sidebar (Code on left, AGY on right)
+-- =============================================================================
+-- AI Assistant Shortcuts (<leader>a...)
+-- =============================================================================
+
+-- <leader>aa -> AGY Right Sidebar
 vim.keymap.set("n", "<leader>aa", function()
-  open_agy_with_context(false, "sidebar")
+  open_ai_cli_with_context("agy", false, "sidebar")
 end, { desc = "AGY Sidebar (current line/file)" })
 
 vim.keymap.set("v", "<leader>aa", function()
-  open_agy_with_context(true, "sidebar")
+  open_ai_cli_with_context("agy", true, "sidebar")
 end, { desc = "AGY Sidebar (selected lines)" })
 
--- <leader>aA -> Floating Window (Center overlay)
+-- <leader>aA -> AGY Floating Window
 vim.keymap.set("n", "<leader>aA", function()
-  open_agy_with_context(false, "float")
+  open_ai_cli_with_context("agy", false, "float")
 end, { desc = "AGY Floating (current line/file)" })
 
 vim.keymap.set("v", "<leader>aA", function()
-  open_agy_with_context(true, "float")
+  open_ai_cli_with_context("agy", true, "float")
 end, { desc = "AGY Floating (selected lines)" })
+
+-- <leader>ac -> Claude Right Sidebar
+vim.keymap.set("n", "<leader>ac", function()
+  open_ai_cli_with_context("claude", false, "sidebar")
+end, { desc = "Claude Sidebar (current line/file)" })
+
+vim.keymap.set("v", "<leader>ac", function()
+  open_ai_cli_with_context("claude", true, "sidebar")
+end, { desc = "Claude Sidebar (selected lines)" })
+
+-- <leader>aC -> Claude Floating Window
+vim.keymap.set("n", "<leader>aC", function()
+  open_ai_cli_with_context("claude", false, "float")
+end, { desc = "Claude Floating (current line/file)" })
+
+vim.keymap.set("v", "<leader>aC", function()
+  open_ai_cli_with_context("claude", true, "float")
+end, { desc = "Claude Floating (selected lines)" })
 

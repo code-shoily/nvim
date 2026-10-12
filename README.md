@@ -1,6 +1,6 @@
 # ⚡ My Neovim Setup
 
-A modern, fast, and keyboard-driven Neovim configuration built on [LazyVim](https://lazyvim.org), tailored for **Clojure (REPL-Driven Development)**, **Gleam**, **Elixir / Rust**, and **AI-assisted coding with Antigravity (AGY)**.
+A modern, fast, and keyboard-driven Neovim configuration built on [LazyVim](https://lazyvim.org), tailored for **Clojure (REPL-Driven Development)**, **Gleam**, **Elixir / Rust**, and **AI-assisted coding with Antigravity (AGY) & Claude Code**.
 
 ---
 
@@ -46,6 +46,7 @@ For full functionality across languages, install the following language tools:
 ### Git & Terminal Tools
 - **lazygit** (for `<Leader>gg` interactive git interface)
 - **agy** (Antigravity CLI) placed on PATH (`~/.local/bin/agy`)
+- **claude** (Claude Code CLI) placed on PATH (`~/.local/bin/claude`)
 
 ---
 
@@ -65,16 +66,20 @@ For full functionality across languages, install the following language tools:
 
 ---
 
-### 🤖 AI Assistant (Antigravity / AGY)
-*Uses your Google subscription with zero per-token API costs.*
+### 🤖 AI Assistants (`<Leader>a...`)
+*Seamless subscription-backed AI agents running directly inside Neovim with persistent terminal sessions, automatic conversation continuation (`-c`), and cursor/selection context.*
 
-| Key | Mode | Action |
-| :--- | :--- | :--- |
-| **`<Leader>aa`** | Normal / Visual | Opens AGY in a **Right Sidebar** (code on left, AGY on right). Pre-populates prompt with current file and line numbers. |
-| **`<Leader>aA`** | Normal / Visual | Opens AGY in a **Floating Window Overlay** (85% centered screen). |
-| `<C-/>` | Any | Toggle / hide terminal sidebar |
+| Key | Mode | Target | Layout | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **`<Leader>aa`** | Normal / Visual | **Antigravity (AGY)** | **Right Sidebar** | Splits screen (code left, agent right). Pre-populates prompt with `file:line` or selected range. |
+| **`<Leader>aA`** | Normal / Visual | **Antigravity (AGY)** | **Floating Overlay** | Centered 85% popover window. |
+| **`<Leader>ac`** | Normal / Visual | **Claude Code** | **Right Sidebar** | Splits screen (code left, Claude right) running `claude -c`. |
+| **`<Leader>aC`** | Normal / Visual | **Claude Code** | **Floating Overlay** | Centered 85% popover window running `claude -c`. |
+| `<C-/>` | Any | Active Terminal | Toggle | Quick hide / show active terminal sidebar. |
 
-*Note: Subsequent `<Leader>aa` calls automatically reuse the running persistent session and continue the active project conversation.*
+*Notes:*
+- **Window Navigation**: Jump between code and AI sidebar using `<C-w>h` (left to code) and `<C-w>l` (right to AI). In terminal insert mode, press `<C-\><C-n>` first or use `<C-w>h`.
+- **Persistent Sessions**: Subsequent calls reuse the existing terminal session and conversation context rather than spawning redundant processes.
 
 ---
 
