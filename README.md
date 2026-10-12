@@ -248,11 +248,12 @@ Full language support for Zig via `lazyvim.plugins.extras.lang.zig`, `zls`, and 
 
 ---
 
-## 🐙 Git Navigation
+## 🐙 Git Navigation & Conflict Resolution
 
+### LazyGit & Hunk Navigation
 | Key | Action |
 | :--- | :--- |
-| **`<Leader>gg`** | Open **LazyGit** full UI in a float |
+| **`<Leader>gg`** | Open **LazyGit** full UI in a float (stage with `Space`, commit with `c`, push with `P`) |
 | **`<Leader>gs`** | Git status picker with diff preview |
 | **`<Leader>gc`** | Git commit log picker |
 | **`]h`** / **`[h`** | Jump to next / previous changed hunk in file |
@@ -260,6 +261,16 @@ Full language support for Zig via `lazyvim.plugins.extras.lang.zig`, `zls`, and 
 | **`<Leader>ghs`** | Stage current hunk |
 | **`<Leader>ghr`** | Reset / undo current hunk |
 | **`<Leader>ghb`** | Blame line |
+
+### ⚔️ Merge Conflicts (`git-conflict.nvim`)
+When merge conflict markers exist in any buffer, conflicts are color-highlighted with one-key resolution:
+| Key | Action | Description |
+| :--- | :--- | :--- |
+| **`co`** | Choose **Ours** | Accept current branch changes |
+| **`ct`** | Choose **Theirs** | Accept incoming branch changes |
+| **`cb`** | Choose **Both** | Keep both changes |
+| **`c0`** | Choose **None** | Delete both conflict blocks |
+| **`]x`** / **`[x`** | Jump to Conflict | Jump to next / previous conflict marker in file |
 
 ---
 
